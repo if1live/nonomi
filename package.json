@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-lambda": "^3.252.0",
     "@next/font": "13.1.2",
     "@types/node": "18.11.17",
     "@types/react": "18.0.26",
