@@ -10,6 +10,7 @@ interface Activity {
 }
 
 export const getServerSideProps = async () => {
+  // TODO: 하드코딩 줄이기?
   const host =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
@@ -46,15 +47,15 @@ export default function Home(props: any) {
       <main className={styles.main}>
         <Container>
           <Header as="h1">Nonomi</Header>
-          <p>Personal FaaS Router</p>
           <Image src="/nonomi-memorial.jpg" size="large" alt="nonomi" />
 
-          <Table compact selectable unstackable>
+          <p>Personal FaaS Router</p>
+
+          <Table compact selectable unstackable size="large">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>activity</Table.HeaderCell>
-                <Table.HeaderCell>last modified time</Table.HeaderCell>
-                <Table.HeaderCell>actions</Table.HeaderCell>
+                <Table.HeaderCell>etc</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -69,9 +70,11 @@ export default function Home(props: any) {
                     <Table.Cell>
                       {url ? <a href={url}> {name} </a> : name}
                     </Table.Cell>
-                    <Table.Cell>{date?.toLocaleString() ?? "NULL"}</Table.Cell>
                     <Table.Cell>
-                      <Button size="mini">synchronize</Button>
+                      <details>
+                        <summary>actions</summary>
+                        <Button size="mini">synchronize</Button>
+                      </details>
                     </Table.Cell>
                   </Table.Row>
                 );
