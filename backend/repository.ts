@@ -9,14 +9,14 @@ function createSupabase() {
 const supabase = createSupabase();
 
 // 테이블 정의 하드 코딩
-const tableName = "nonomi_service";
+const tableName = "nonomi_activity";
 const functionNameColumn = "function_name";
 const functionUrlColumn = "function_url";
 const functionArnColumn = "function_arn";
 const creationTimeColumn = "creation_time";
 const lastModifiedTime = "last_modified_time";
 
-export interface ServiceEntity {
+export interface ActivityEntity {
   id: number;
   functionName: string;
   functionUrl: string;
@@ -45,7 +45,7 @@ export async function findIdByFunctionName(
   return id;
 }
 
-export async function updateById(id: number, ent: Partial<ServiceEntity>) {
+export async function updateById(id: number, ent: Partial<ActivityEntity>) {
   await supabase
     .from(tableName)
     .update({
@@ -57,14 +57,14 @@ export async function updateById(id: number, ent: Partial<ServiceEntity>) {
     .eq("id", id);
 }
 
-export async function list(): Promise<Partial<ServiceEntity>[]> {
+export async function findAll(): Promise<Partial<ActivityEntity>[]> {
   const { data: rows, error } = await supabase.from(tableName).select("*");
 
   if (error) throw error;
   if (!rows) throw new Error("rows is falsy");
 
   const entities = rows.map((row) => {
-    const ent: ServiceEntity = {
+    const ent: ActivityEntity = {
       id: row.id,
       functionName: row[functionNameColumn],
       functionUrl: row[functionUrlColumn],
